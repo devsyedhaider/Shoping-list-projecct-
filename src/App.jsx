@@ -1,58 +1,105 @@
-import img1 from "./assets/1.jpg";
-
-const ShopingItems = [
-  {
-    id: 118836,
-    name: "Product 1",
-    image: img1,
-    balance: 900,
-  },
-  {
-    id: 933372,
-    name: "Product 2",
-    image: img1,
-    balance: 20,
-  },
-  {
-    id: 499476,
-    name: "Product 3",
-    image: img1,
-    balance: 30,
-  },
-];
+import { useState } from "react";
 
 export default function App() {
+  const [count, setCount] = useState(0);
+  const [Products, setProducts] = useState([]);
+
+  function handleCount() {
+    setCount((count) => count + 1);
+  }
+
+  function handleAddProducts(product) {
+    setProducts((Products) => [...Products, product]);
+  }
+
   return (
     <div>
       <div className="nav">
         <h1>ShopingCard</h1>
         <p>
-          🔔
-          <span>0</span>
+          🔔 <span>{count}</span>
         </p>
       </div>
-      <ShopingCard />
+
+      <ShopingCard countUpdate={handleCount} Products={Products} />
+      <AddProduct handleAddItem={handleAddProducts} />
     </div>
   );
 }
 
-function ShopingCard() {
+function ShopingCard({ countUpdate, Products }) {
   return (
     <div className="shoping">
-      {ShopingItems.map((item) => (
-        <Product item={item} key={item.id} />
+      {Products.map((item) => (
+        <Product item={item} key={item.id} countUpdate={countUpdate} />
       ))}
     </div>
   );
 }
 
-function Product({ item }) {
+function Product({ item, countUpdate }) {
   return (
-    <div>
-      <img src={item.image} alt={item.name} />
-      <h1>{item.name}</h1>
-      <p>{item.balance}</p>
-      <button>Buy now</button>
+    <div className="card">
+      <img src={item.img} alt={item.name} width="200" />
+      <h3>{item.name}</h3>
+      <p>Price: ${item.price}</p>
+      <button onClick={countUpdate}>Buy now</button>
+    </div>
+  );
+}
+
+function AddProduct({ handleAddItem }) {
+  const [name, setName] = useState("");
+  const [img, setImg] = useState("");
+  const [price, setPrice] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!name || !img || !price) return;
+
+    const newProduct = {
+      id: crypto.randomUUID(),
+      name,
+      img,
+      price,
+    };
+
+    handleAddItem(newProduct);
+
+    setName("");
+    setImg("");
+    setPrice("");
+  }
+
+  return (
+    <div className="center">
+      <form className="form" onSubmit={handleSubmit}>
+        <h2>Add Product</h2>
+
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Product name"
+        />
+
+        <input
+          type="text"
+          value={img}
+          onChange={(e) => setImg(e.target.value)}
+          placeholder="Image path (example: /assets/1.jpg)"
+        />
+
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(Number(e.target.value))}
+          placeholder="Product price"
+        />
+
+        <button>Add Product</button>
+      </form>
     </div>
   );
 }

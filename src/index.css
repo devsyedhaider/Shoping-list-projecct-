@@ -28,6 +28,7 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  margin-bottom: 3rem;
 }
 
 .shoping div {
@@ -48,4 +49,24 @@ button {
   text-align: center;
   border: none;
   cursor: pointer;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  padding: 1rem;
+  gap: 1rem;
+  border: 1px solid #ccc;
+  margin-bottom: 5rem;
+}
+
+input {
+  padding: 1rem;
+  font-size: 1rem;
 }
