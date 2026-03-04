@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 20rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 13rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.nav p {
+  display: flex;
+  gap: 1rem;
+}
+
+.shoping {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.shoping div {
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+p {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  color: #fff;
+  background-color: black;
+  padding: 1rem 8.5rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
